@@ -42,7 +42,7 @@ public class ArvoreBinaria<T> {
         System.out.println();
     }
     private  void mostrarInOrder(NodeAr<T> node){
-        if(node==null){
+        if(node!=null){
             mostrarInOrder(node.filhoEsquerdo);
             System.out.println(node.valor + "");
             mostrarInOrder(node.filhoDireito);
