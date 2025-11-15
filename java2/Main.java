@@ -25,9 +25,35 @@ public class Main {
         System.out.println("\n=== Testando ListaDuplamenteEncadeada ===");   
         ListaDuplamenteEncadeada<Integer> listaInt = new ListaDuplamenteEncadeada<>();
         listaInt.menuInterativo();
-        ListaDuplamenteEncadeada<String> listaString = new ListaDuplamenteEncadeada<>();
-        listaString.menuInterativo();
+    
         
+        System.out.println("\n=== Testando ListaCircular ==="); 
+        ListaCircular<Integer>listaCircular=new ListaCircular<>(); 
+        listaCircular.adicionar(12); 
+        listaCircular.adicionar(32);
+        listaCircular.adicionar(45);
+        listaCircular.mostrar();
+        listaCircular.excluir();
+        listaCircular.buscar(32);
+        listaCircular.mostrar();
 
+
+        System.out.println("\n=== Testando ArvoreBinaria ==="); 
+        ArvoreBinaria<Integer> arvore = new ArvoreBinaria<>();
+        arvore.adicionar(50);
+        arvore.adicionar(30);
+        arvore.adicionar(70);
+        arvore.adicionar(20);
+        arvore.adicionar(40);
+        arvore.adicionar(60);
+        arvore.adicionar(80);
+        
+        arvore.mostrar(); 
+        System.out.println("Busca por 40: " + arvore.buscar(40)); // true
+        System.out.println("Busca por 99: " + arvore.buscar(99)); // false
+        arvore.excluir(20);
+        arvore.mostrar(); 
+        arvore.excluir(50); 
+        arvore.mostrar();
     }
 }

@@ -123,14 +123,14 @@ public int buscar(T dado) {
    
    do {
        if (atual.getDado().equals(dado)) {
-           System.out.println("🔍 Encontrado: " + dado + " na posição " + posicao + ".");
+           System.out.println("Encontrado: " + dado + " na posição " + posicao + ".");
            return posicao;
        }
        atual = (NodeDuplo<T>) atual.getProximo();
        posicao++;
    } while (atual != frente);
 
-   System.out.println("❌ Não encontrado: " + dado + " na lista.");
+   System.out.println("Não encontrado: " + dado + " na lista.");
    return -1;
 }
 
@@ -138,7 +138,7 @@ public int buscar(T dado) {
 
 public void concatenar(ListaCircular<T> outraLista) {
    if (outraLista.frente == null) {
-       System.out.println("🔗 Lista de origem vazia. Nada a concatenar.");
+       System.out.println("Lista de origem vazia. Nada a concatenar.");
        return;
    }
    
