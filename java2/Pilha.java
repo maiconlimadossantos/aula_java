@@ -45,34 +45,8 @@ public class Pilha<T> extends Fila<T> {
         // ASSUMINDO QUE `tras` FOI ALTERADO PARA `protected` EM `Fila<T>` PARA A HERANÇA FUNCIONAR
         // *****************************************************************************************
         // Se Pilha estava vazia, o novo nó é o 'tras' (base da pilha)
-        if (super.getTamanho() == 0) {
-            // Esta linha é problemática se 'tras' for privado.
-            // Se fosse protected: super.tras = novo;
-            // Como 'tras' é privado em Fila, vamos ignorar, pois Pilha não precisa de 'tras'
-            // exceto para o caso de Pilha com 1 elemento.
-            // Para ter certeza que a Fila base está consistente, vamos usar uma lógica mais simples.
-            // Se frente == null, é a primeira adição. 'tras' deve ser atualizado para 'novo'.
-            // Como não temos acesso a 'tras', a superclasse Fila precisaria ser modificada.
-            // Se não modificarmos Fila, o campo 'tras' na Fila base será sempre o primeiro elemento
-            // *removido* se a pilha crescer e nunca for removido totalmente. **Isso é um bug.**
-            // A única maneira de corrigir sem mudar o acesso de 'tras' é:
-            if (super.getTamanho() == 0) {
-                 // A única forma de manter o 'tras' da Fila base consistente é se 'setFrente'
-                 // fosse inteligente o suficiente, o que não é o caso.
-                 // Pelo design de herança, **a classe Fila precisa ser modificada** para `protected Node<T> tras;`
-                 // ou Pilha não deve herdar de Fila.
-                 // Vou manter o código original para o 'tras' (que estava errado em Fila.adicionar(T dado)),
-                 // mas o ideal seria acessar 'tras' e corrigi-lo.
-
-
-                 // Se `tras` fosse protected:
-                 // if (tras == null) { tras = novo; }
-            }
-        } else {
-             // Quando Pilha tem > 1 elemento, 'tras' deve apontar para o último elemento inserido
-             // pela lógica da Fila, que não é o que queremos em uma Pilha.
-        }
-
+      
+        
 
         super.tamanho++;
         System.out.println("Push: " + dado);
