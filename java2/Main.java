@@ -21,6 +21,8 @@ public class Main {
         pilha.mostrar();
         pilha.excluir();
         pilha.mostrar();
+        pilha.analisesintatico("((2+2)*(4-3))");
+        pilha.mostrar();
 
         System.out.println("\n=== Testando ListaDuplamenteEncadeada ===");   
         ListaDuplamenteEncadeada<Integer> listaInt = new ListaDuplamenteEncadeada<>();
@@ -32,10 +34,18 @@ public class Main {
         listaCircular.adicionar(12); 
         listaCircular.adicionar(32);
         listaCircular.adicionar(45);
+        listaCircular.adicionar(22);
+        listaCircular.adicionar(18);
         listaCircular.mostrar();
         listaCircular.excluir();
         listaCircular.buscar(32);
         listaCircular.mostrar();
+        listaCircular.concatenar(listaCircular );
+        listaCircular.mostrarElementos();
+        listaCircular.inserirOrdenador( 25);
+        listaCircular.mostrar();
+        
+
 
 
         System.out.println("\n=== Testando ArvoreBinaria ==="); 

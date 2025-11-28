@@ -137,29 +137,92 @@ public int buscar(T dado) {
 
 
 public void concatenar(ListaCircular<T> outraLista) {
-   if (outraLista.frente == null) {
-       System.out.println("Lista de origem vazia. Nada a concatenar.");
+    if (outraLista.frente == null) {
+        System.out.println("Lista de origem vazia. Nada a concatenar.");
+        return;
+    }
+    if (this.frente == null) {
+        this.frente = outraLista.frente;
+        this.tras = outraLista.tras;
+        this.tamanho = outraLista.tamanho;
+    } else {
+        NodeDuplo<T> cauda1 = (NodeDuplo<T>) this.tras;
+        NodeDuplo<T> cabeca2 = (NodeDuplo<T>) outraLista.frente;
+        NodeDuplo<T> cauda2 = (NodeDuplo<T>) outraLista.tras;
+        NodeDuplo<T> cabeca1 = (NodeDuplo<T>) this.frente;
+        cabeca2.setAnterior(cauda1);
+        cauda1.setProximo(cabeca2);
+
+        // c. Atualizar a cauda da lista resultante
+        this.tras = cauda2;
+
+        // d. Manter a circularidade (Fechar o ciclo da nova lista)
+        cauda2.setProximo(cabeca1);
+        cabeca1.setAnterior(cauda2);
+
+        // e. Atualizar o tamanho
+        this.tamanho += outraLista.tamanho;
+    }
+
+    // 4. Limpar a lista de origem (outraLista)
+    outraLista.frente = null;
+    outraLista.tras = null;
+    outraLista.tamanho = 0;
+
+    // NOVO: Exibir os elementos da lista concatenada
+    System.out.println("Listas concatenadas com sucesso! A lista de origem agora está vazia.");
+    mostrarElementos(); 
+    System.out.println("Novo tamanho: " + this.tamanho);
+}
+public void mostrarElementos() {
+   if (frente == null) {
+       System.out.println("Lista vazia.");
        return;
    }
    
-   if (this.frente == null) {
-       this.frente = outraLista.frente;
-       this.tras = outraLista.tras;
-       this.tamanho = outraLista.tamanho;
-   } else {
-       
-       NodeDuplo<T> cauda1 = (NodeDuplo<T>) this.tras;
-       cauda1.setProximo(outraLista.frente);
-       ((NodeDuplo<T>) outraLista.frente).setAnterior(cauda1);
-       this.tras = outraLista.tras;
-       this.tamanho += outraLista.tamanho;
-       
+   NodeDuplo<T> atual = (NodeDuplo<T>) frente;
+   System.out.print("Elementos da Lista Circular: ");
+   
+   do {
+       System.out.print(atual.getDado() + " ");
+       atual = (NodeDuplo<T>) atual.getProximo();
+   } while (atual != frente);
+   
+   System.out.println();
+
+}
+   public  void inserirOrdenador(T dado) {
+       NodeDuplo<T> novo = new NodeDuplo<>(dado);
+       if (frente == null) {
+           frente = novo;
+           tras = novo;
+           manterCircularidade();
+           tamanho++;
+           return;
+       }
+       NodeDuplo<T> atual = (NodeDuplo<T>) frente;
+       NodeDuplo<T> anterior = (NodeDuplo<T>) tras;
+       do {
+           if (((Comparable<T>) atual.getDado()).compareTo(dado) >= 0) {
+               break;
+           }
+           anterior = atual;
+           atual = (NodeDuplo<T>) atual.getProximo();
+       } while (atual != frente);
+       novo.setProximo(atual);
+       novo.setAnterior(anterior);
+       anterior.setProximo(novo);
+       atual.setAnterior(novo);
+       if (atual == frente && ((Comparable<T>) atual.getDado()).compareTo(dado) >= 0) {
+           frente = novo;
+       }
+       if (anterior == tras && ((Comparable<T>) anterior.getDado()).compareTo(dado) < 0) {
+           tras = novo;
+       }
+       tamanho++;
        manterCircularidade();
    }
-   outraLista.frente = null;
-   outraLista.tras = null;
-   outraLista.tamanho = 0;
-   
-   System.out.println(" Listas concatenadas com sucesso! A lista de origem agora está vazia.");
-}
+
+
+
 }

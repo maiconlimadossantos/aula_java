@@ -85,4 +85,31 @@ public class Pilha<T> extends Fila<T> {
         }
         System.out.println();
     }
+
+    public boolean analisesintatico(String expressao) {
+        System.out.println("Iniciando análise sintática para: \"" + expressao + "\"");
+        
+        for (char ch : expressao.toCharArray()) {
+            if (ch == '(') {
+                this.adicionar((T) Character.valueOf(ch));
+            } else if (ch == ')') {
+                if (this.estaVazia()) {
+                    System.out.println(" Falha na análise: ')' encontrado sem um '(' correspondente (Pilha vazia).");
+                    return false;
+                }
+                this.excluir();
+            }
+            
+        }
+        
+     
+        if (this.estaVazia()== true) {
+            System.out.println(" Análise Sintática Concluída: Parênteses estão **Balanceados**." );
+            return true;
+        } else {
+            
+            System.out.println(" Falha na análise: Expressão terminada, mas a Pilha não está vazia. Faltando ')' de fechamento.");
+            return false;
+        }
+    }
 }
